@@ -1,6 +1,5 @@
-# IGC_GA
- Interval Grapg Coloring Greedy Algorithm
-
+# Interval Graph Coloring (Greedy Algorithm)
+...
 
 ### Sample Test
 
@@ -18,11 +17,12 @@ Intervals : {(1,3), (1,5), (1,2), (4,8), (2,8), }
  * Chromatic Number of G = 4
 
 Optimal Coloring 
-No.  Intervals  Color
-  1      1, 3      2
-  2      1, 5      3
-  3      1, 2      4
-  4      2, 8      5
-  5      4, 8      1
+|No.  |Intervals|Color|
+| ---:|     ---:| ---:|
+|  1  |     1, 3|.   2|
+|  2  |     1, 5|    3|
+|  3  |     1, 2|    4|
+|  4  |     2, 8|    5|
+|  5  |     4, 8|    1|
 
 *** End ***
