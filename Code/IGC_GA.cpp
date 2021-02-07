@@ -70,27 +70,6 @@ void GreedyColoring() {
         }
     }
 
-//    // Finding min&max deg ***
-//    int min_deg = num_intervals-1;
-//    int max_deg = 0;
-//    int deg = 0;
-//
-//    for (i = 0; i < num_intervals; i++) {
-//        for (j = 0; j < num_intervals; j++) {
-//            if ( (i != j) && !((end_arr[i] < start_arr[j]) || (start_arr[i] > end_arr[j])))
-//                deg++;
-//        }
-//        if (max_deg < deg)
-//            max_deg = deg;
-//        if (min_deg > deg)
-//            min_deg = deg;
-//        deg = 0;
-//    }
-//
-//    cout << "\n * Maximum Degree of G : " << max_deg;
-//    cout << "\n * Minimum Degree of G : " << min_deg;
-
-
     // Chromatic color
     int count_arr_size = 0;
     int chromatic_number = 0;
