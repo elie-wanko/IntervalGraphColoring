@@ -6,13 +6,6 @@
 How many intervals do you want to consider ? 
 5
 
-To enter an interval, type in the start and end separated by a space, e.g. 2 5.
-Interval no. 1: 1 3
-Interval no. 2: 1 5
-Interval no. 3: 1 2
-Interval no. 4: 4 8
-Interval no. 5: 2 8
-
 Intervals : {(1,3), (1,5), (1,2), (4,8), (2,8), }
  * Chromatic Number of G = 4
 
