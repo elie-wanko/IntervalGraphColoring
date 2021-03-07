@@ -1,0 +1,14 @@
+//
+// Created by Elie Wanko on 05/02/2021.
+//
+
+#ifndef INTERVALGRAPHCOLORING_HELPERS_H
+#define INTERVALGRAPHCOLORING_HELPERS_H
+
+
+class helpers {
+
+};
+
+
+#endif //INTERVALGRAPHCOLORING_HELPERS_H

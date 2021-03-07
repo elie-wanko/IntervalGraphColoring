@@ -1,3 +1,0 @@
-/Volumes/Data/_UCA/_Advanced Research Activity/IGC_GA/Code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Volumes/Data/_UCA/_Advanced Research Activity/IGC_GA/Code/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Volumes/Data/_UCA/_Advanced Research Activity/IGC_GA/Code/cmake-build-debug/CMakeFiles/Code.dir

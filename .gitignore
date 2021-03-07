@@ -30,3 +30,23 @@
 *.exe
 *.out
 *.app
+
+
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+
+#
+.idea/*
+*.xml
+*.iml
+.DS_Store
+
+cmake-build-debug/
