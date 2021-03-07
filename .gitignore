@@ -48,5 +48,5 @@
 *.xml
 *.iml
 .DS_Store
-
+*gitattributes
 cmake-build-debug/
