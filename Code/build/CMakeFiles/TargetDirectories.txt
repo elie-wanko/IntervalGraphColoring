@@ -1,0 +1,3 @@
+/Volumes/Data/_UCA/_Advanced Research Activity/HeuristicIntervalColoring/build/CMakeFiles/rebuild_cache.dir
+/Volumes/Data/_UCA/_Advanced Research Activity/HeuristicIntervalColoring/build/CMakeFiles/edit_cache.dir
+/Volumes/Data/_UCA/_Advanced Research Activity/HeuristicIntervalColoring/build/CMakeFiles/HeuristicIntervalColoring.dir

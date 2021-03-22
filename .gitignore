@@ -50,3 +50,4 @@
 .DS_Store
 *gitattributes
 cmake-build-debug/
+resources/

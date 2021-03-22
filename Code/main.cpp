@@ -1,131 +1,117 @@
-//
-// Created by Elie on 18/01/2021.
-//
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iomanip>
-#include <string>
+#include <cstdlib>
+#include <vector>
+
+#include "utils/AdjacencyMatrix.h"
+#include "utils/WeightVector.h"
+#include "utils/NodesOrdering.h"
+#include "utils/IntervalColoring.h"
+#include "helpers/Helpers.h"
 
 
 using namespace std;
-
-// An interval has a start time and end time
-struct Interval {
-    int start, end;
-};
-
-// Compares two intervals according to staring times.
-bool compareInterval(Interval i1, Interval i2) {
-    return (i1.start < i2.start);
-}
-
-void GreedyColoring() {
-    int num_intervals;
-    cout << "How many intervals do you want to consider ? \n";
-    cin >>  num_intervals;
-
-    // Creating array to store intervals
-    int arr_size = num_intervals;
-    int *start_arr = (int *)malloc(arr_size * sizeof(int));
-    int *end_arr = (int *)malloc(arr_size * sizeof(int));
-
-    // intervals from user to array's
-    int interval_start, interval_end;
-
-    cout << "\nTo enter an interval, type in the start and end separated by a space, e.g. 2 5." << endl;
-    for (int i = 0; i < num_intervals; i++) {
-        cout <<"Interval no. " << i+1 << ": ";
-        cin >> interval_start >> interval_end;
-        start_arr[i] = interval_start;
-        end_arr[i] = interval_end;
-    }
-
-
-    //cout graph intervals
-    cout <<"\nIntervals : {" ;
-    for (int i = 0; i < num_intervals; i++) {
-        cout << "(" << start_arr[i] << "," << end_arr[i] << "), ";
-    }
-    cout <<"}";
-
-    // Sorting intervals arrays by starters only
-    int temp, j;
-    for (j = 0; j < num_intervals; j++) {
-        for (int i = 1; i < num_intervals; i++) {
-            if (start_arr[i - 1] > start_arr[i]) {
-
-                //swaping the start_array
-                temp = start_arr[i - 1];
-                start_arr[i - 1] = start_arr[i];
-                start_arr[i] = temp;
-
-                //swaping the end_array
-                temp = end_arr[i - 1];
-                end_arr[i - 1] = end_arr[i];
-                end_arr[i] = temp;
-            }
-        }
-    }
-
-    // Chromatic color
-    int count_arr_size = 0;
-    int chromatic_number = 0;
-
-    for (int i = 0; i < num_intervals; i++) {
-        if (count_arr_size < end_arr[i])
-            count_arr_size = end_arr[i];
-    }
-    count_arr_size++; // cause we most include the specific 'end' value
-    // creating a count_array & set 0's ...
-    int *count_arr = (int *)malloc(count_arr_size * sizeof(int));
-    for (int i = 0; i < count_arr_size; i++)
-        count_arr[i] = 0;
-
-    //"installing & suming" the intervals lengh to array
-    for (int i = 0; i < num_intervals; i++) { // running all the intervals
-        for (j = start_arr[i]; j <= end_arr[i]; j++) // running about any interval range
-            (count_arr[j])++;
-    }
-
-    //set chromatic number of g to the max value of count_array
-    for (int i = 0; i < count_arr_size; i++) {
-        if (chromatic_number < count_arr[i])
-            chromatic_number = count_arr[i];
-    }
-    cout <<"\n * Chromatic Number of G = " << chromatic_number;
-
-
-    // Optimal coloring (greedy coloring algorithm)
-    int *intervalColors_arr = (int *)malloc(num_intervals * sizeof(int));
-    int *usedColors_arr = (int *)malloc(num_intervals * sizeof(int));
-
-    for (int i = 0; i < num_intervals; i++) // set zero's as the default color for all intervals
-        intervalColors_arr[i] = 0;
-
-    for (int i = 0; i < num_intervals; i++) {
-        for (j = 0; j < num_intervals; j++) // clearing the used colors list
-            usedColors_arr[j] = 0;
-        for (j = 0; j < num_intervals; j++) {
-            if ((i != j) && !((end_arr[i] < start_arr[j]) || (start_arr[i] > end_arr[j])))
-                usedColors_arr[intervalColors_arr[j]]++;
-        }
-        j = 0;
-        while (usedColors_arr[j] != 0) // finding the smallest color that not in use.
-            j++;
-        intervalColors_arr[i] = j;
-    }
-
-    // cout intervals colorings
-    cout <<("\n\nOptimal Coloring \n");
-    cout << setw(3) << "No." << setw(10) << "  Intervals" << setw(7) << "  Color" << endl;
-    for (int i = 0; i < num_intervals; i++) {
-        cout << setw(3) << i + 1 << setw(10) << to_string(start_arr[i]) + ", " + to_string(end_arr[i]) << setw(7) << intervalColors_arr[i] + 1 << endl;
-    }
-}
+vector<char> nodeLabel = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
 
 
 int main() {
-    GreedyColoring();
-    cout << "\n*** End ***\n" << endl;
+    std::cout << "\n***  Heuristic Interval Coloring!  ***\n" << std::endl;
+
+    int size, max_edges, edge_start, edge_end, weight;
+    bool validMatrix, validVector = false;
+
+    do {
+        cout << "Enter size 'n' of Adjacency Matrix : ";
+        cin >> size;
+
+        if (cin.good() && size > 1){
+            validMatrix = true;
+            break;
+        } else{
+            cin.clear();  //something went wrong, we reset the buffer's state to good
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');  //and empty it
+            cout << "Invalid input! Please make sure the input is an integer and it is greater than or equal to 2." << endl;
+        }
+    } while (!validMatrix);
+
+    /*
+     *1 Creating the adjacency matrix.
+     */
+    AdjacencyMatrix adjacencyMatrix = AdjacencyMatrix (size);
+    max_edges = size * (size - 1);  // max number of edges in an undirected graph
+    cout << "Awesome! You have opted to create an 'Adjacency Matrix' of size " << size << "*" << size <<
+         ".\nThe maximum number of edges is " << max_edges << ".\n" << endl;
+
+    for (int i = 0; i < max_edges; i++) {
+        cout << "Enter edge (-1 -1 to exit): ";
+        cin >> edge_start >> edge_end;
+        if ((edge_start == -1) && (edge_end == -1))
+            break;
+        adjacencyMatrix.addEdge(edge_start, edge_end);
+    }
+    adjacencyMatrix.displayMatrix();
+
+    /*
+     * Creating the weight vector
+     */
+    cout << "\nNow, let's create the weight vector, w." << endl;
+    vector<vector<int>> weightVector(0);
+    do{
+        for (int i = 0; i<size;) {
+            cout << "Enter weight of node " << nodeLabel[i] << " : ";
+            cin >> weight;
+            if (cin.good() && weight > 0) {
+                weightVector.push_back({i+1, weight});
+                i++;
+            } else {
+                cin.clear();  //something went wrong, we reset the buffer's state to good
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');  //and empty it
+                cout << "Invalid input! Please make sure the weight is an integer greater than or equal to one."
+                     << endl;
+            }
+        }
+        validVector = true;
+    } while (!validVector);
+
+
+    printIntGrid(weightVector);
+    vector<vector<int>> weightVector1, weightVector2, weightVector3, weightVector4;
+    weightVector1 = indexGreedy(weightVector);
+    weightVector2 = weightGreedy(weightVector);
+    weightVector3 = degreeGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector);
+    weightVector4 = neighborGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector);
+
+    cout << "\nIndex Greedy : " << endl;
+    printIntGrid(weightVector1);
+    for (int i = 0; i < size; ++i) {
+        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), indexGreedy(weightVector1));
+        weightVector1[i].insert(end(weightVector1[i]), begin(s_k), end(s_k));
+    }
+    printIntGrid(weightVector1);
+
+    cout << "\nWeight Greedy : " << endl;
+    printIntGrid(weightVector2);
+    for (int i = 0; i < size; ++i) {
+        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), weightGreedy(weightVector2));
+        weightVector2[i].insert(end(weightVector2[i]), begin(s_k), end(s_k));
+    }
+    printIntGrid(weightVector2);
+
+    cout << "\nDegree Greedy : " << endl;
+    printIntGrid(weightVector3);
+    for (int i = 0; i < size; ++i) {
+        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), degreeGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector3));
+        weightVector3[i].insert(end(weightVector3[i]), begin(s_k), end(s_k));
+    }
+    printIntGrid(weightVector3);
+
+    cout << "\nNeighbor Greedy : " << endl;
+    printIntGrid(weightVector4);
+    for (int i = 0; i < size; ++i) {
+        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), neighborGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector4));
+        weightVector4[i].insert(end(weightVector4[i]), begin(s_k), end(s_k));
+    }
+    printIntGrid(weightVector4);
+
+    cout << "\n***  DONE!  ***\n" << endl;
+    return 0;
 }
