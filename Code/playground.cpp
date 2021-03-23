@@ -18,6 +18,8 @@ using namespace std;
 //vector<string> nodeLabel = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"};
 
 
+
+
 int main () {
 
 //    int n = 10;
@@ -67,38 +69,46 @@ int main () {
     vector<int> n_i = {0, 1, 2, 3, 4};
 
     cout << "\n1 by Index ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid1, ordering1i));
-    }
+    printIntGrid(intervalColoring(grid2, ordering2i));
 
-    cout << "\n1 by Weight ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid1, ordering1w));
-    }
 
-    cout << "\n1 by Neighbour ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid1, ordering1n));
-    }
+//
+//    int n =7;
+//    cout << getIndex(ordering2w, n) << endl;
 
-    cout << "\n2 by Index ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid2, ordering2i));
-    }
 
-    cout << "\n2 by Weight ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid2, ordering2w));
-    }
 
-    cout << "\n2 by Degree ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid2, ordering2d));
-    }
 
-    cout << "\n2 by Neighbour ..." << endl;
-    for (int i = 0; i < n_i.size(); ++i) {
-        printIntVector(intervalColoring(n_i[i], grid2, ordering2n));
-    }
+
+
+//    cout << "\n1 by Weight ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid1, ordering1w));
+//    }
+//
+//    cout << "\n1 by Neighbour ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid1, ordering1n));
+//    }
+//
+//    cout << "\n2 by Index ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid2, ordering2i));
+//    }
+//
+//    cout << "\n2 by Weight ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid2, ordering2w));
+//    }
+//
+//    cout << "\n2 by Degree ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid2, ordering2d));
+//    }
+//
+//    cout << "\n2 by Neighbour ..." << endl;
+//    for (int i = 0; i < n_i.size(); ++i) {
+//        printIntVector(intervalColoring(n_i[i], grid2, ordering2n));
+//    }
 
 }

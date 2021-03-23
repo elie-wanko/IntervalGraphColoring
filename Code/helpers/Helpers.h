@@ -56,4 +56,5 @@ inline void printStringVector(vector <string> const &v) {
     cout << endl;
 }
 
+
 #endif //HEURISTICINTERVALCOLORING_HELPERS_H
