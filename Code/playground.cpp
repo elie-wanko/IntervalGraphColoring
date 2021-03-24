@@ -57,7 +57,9 @@ int main () {
             {1, 0, 0, 1, 0, 1, 0},
             {0, 0, 1, 0, 1, 0, 1},
             {1, 1, 0, 0, 0, 1, 0}};
+
     ordering2i = {{1, 1}, {2, 2}, {3, 2}, {4, 3}, {5, 2}, {6, 3}, {7, 3}};
+
     ordering2w = {{4, 3}, {6, 3}, {7, 3}, {2, 2}, {3, 2}, {5, 2}, {1, 1}};
     ordering2d = {{1, 1}, {2, 2}, {4, 3}, {3, 2}, {5, 2}, {6, 3}, {7, 3}};
     ordering2n = {{1, 1}, {2, 2}, {3, 2}, {4, 3}, {6, 3}, {5, 2}, {7, 3}};
@@ -68,8 +70,8 @@ int main () {
     int l = 1, l_k = 1, r_k;
     vector<int> n_i = {0, 1, 2, 3, 4};
 
-    cout << "\n1 by Index ..." << endl;
-    printIntGrid(intervalColoring(grid2, ordering2i));
+    cout << "\nBy Weight ..." << endl;
+    printIntGrid(intervalColoring(grid1, ordering1w));
 
 
 //

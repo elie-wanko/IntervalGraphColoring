@@ -73,44 +73,35 @@ int main() {
     } while (!validVector);
 
 
-    printIntGrid(weightVector);
-    vector<vector<int>> weightVector1, weightVector2, weightVector3, weightVector4;
-    weightVector1 = indexGreedy(weightVector);
-    weightVector2 = weightGreedy(weightVector);
-    weightVector3 = degreeGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector);
-    weightVector4 = neighborGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector);
+    /*
+     * RUNS
+     */
+    vector<vector<int>> weightVector1, weightVector2, weightVector3, weightVector4, matrix;
+    matrix = adjacencyMatrix.getAdjacencyMatrix();
+
+
+    cout << "\n***  SOLUTIONS  ***\n" << endl;
 
     cout << "\nIndex Greedy : " << endl;
+    weightVector1 = indexGreedy(weightVector);
     printIntGrid(weightVector1);
-    for (int i = 0; i < size; ++i) {
-        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), indexGreedy(weightVector1));
-        weightVector1[i].insert(end(weightVector1[i]), begin(s_k), end(s_k));
-    }
-    printIntGrid(weightVector1);
+    printIntGrid(intervalColoring(matrix, weightVector1));
 
     cout << "\nWeight Greedy : " << endl;
+    weightVector2 = weightGreedy(weightVector);
     printIntGrid(weightVector2);
-    for (int i = 0; i < size; ++i) {
-        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), weightGreedy(weightVector2));
-        weightVector2[i].insert(end(weightVector2[i]), begin(s_k), end(s_k));
-    }
-    printIntGrid(weightVector2);
+    printIntGrid(intervalColoring(matrix, weightVector2));
 
     cout << "\nDegree Greedy : " << endl;
+    weightVector3 = degreeGreedy(matrix, weightVector);
     printIntGrid(weightVector3);
-    for (int i = 0; i < size; ++i) {
-        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), degreeGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector3));
-        weightVector3[i].insert(end(weightVector3[i]), begin(s_k), end(s_k));
-    }
-    printIntGrid(weightVector3);
+    printIntGrid(intervalColoring(matrix, weightVector3));
 
     cout << "\nNeighbor Greedy : " << endl;
+    weightVector4 = neighborGreedy(matrix, weightVector);
     printIntGrid(weightVector4);
-    for (int i = 0; i < size; ++i) {
-        vector<int> s_k = intervalColoring(i, adjacencyMatrix.getAdjacencyMatrix(), neighborGreedy(adjacencyMatrix.getAdjacencyMatrix(), weightVector4));
-        weightVector4[i].insert(end(weightVector4[i]), begin(s_k), end(s_k));
-    }
-    printIntGrid(weightVector4);
+    printIntGrid(intervalColoring(matrix, weightVector3));
+
 
     cout << "\n***  DONE!  ***\n" << endl;
     return 0;

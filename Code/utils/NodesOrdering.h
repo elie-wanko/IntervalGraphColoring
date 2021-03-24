@@ -12,7 +12,7 @@
 using namespace std;
 
 
-inline vector<vector<int>> indexGreedy(vector<vector<int>> &weightVector) {
+inline vector<vector<int>> indexGreedy(vector<vector<int>> weightVector) {
     sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[0] < b[0];
     });
@@ -20,7 +20,7 @@ inline vector<vector<int>> indexGreedy(vector<vector<int>> &weightVector) {
     return weightVector;
 }
 
-inline vector<vector<int>> weightGreedy(vector<vector<int>> &weightVector) {
+inline vector<vector<int>> weightGreedy(vector<vector<int>> weightVector) {
     sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[1] > b[1];
     });
@@ -34,17 +34,17 @@ inline vector<vector<int>> degreeGreedy(vector<vector<int>> &adjacencyMatrix, ve
         weightVector[i].push_back(accumulate(adjacencyMatrix[i].begin(), adjacencyMatrix[i].end(), 0));
     }
 
-    sort(weightVector.begin(), weightVector.end(), [](const vector<int>& a, const vector<int>& b) {
+    sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[2] > b[2];
     });
 
     return weightVector;
 }
 
-inline vector<vector<int>> neighborGreedy(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> &weightVector) {
+inline vector<vector<int>> neighborGreedy(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> weightVector) {
     vector<int> weights, tempVector;
 
-    for (auto & i : weightVector){
+    for (auto &i : weightVector){
         weights.push_back(i[1]);
     }
 
@@ -54,10 +54,8 @@ inline vector<vector<int>> neighborGreedy(vector<vector<int>> &adjacencyMatrix, 
         transform(adjacencyMatrix[i].begin(), adjacencyMatrix[i].end(),
                   tempVector.begin(), tempVector.begin(),
                   multiplies<int>());
-
         weightVector[i].push_back(accumulate(tempVector.begin(), tempVector.end(), 0));
     }
-
     sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[2] > b[2];
     });

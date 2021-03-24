@@ -11,8 +11,13 @@
 #include <numeric>
 #include <tuple>
 
+
 using namespace std;
 
+
+/*
+ * Gets Neighbors of 'node' k based on 'ordering'.
+ */
 inline vector<int> getNeighbors(int &index, vector<vector<int>> &adjacencyMatrix, vector<vector<int>> &weightVector){
     vector<int> n_k, ordering;
 
@@ -31,6 +36,7 @@ inline vector<int> getNeighbors(int &index, vector<vector<int>> &adjacencyMatrix
     return n_k;
 }
 
+
 /*
  * Removes first element of vector
  */
@@ -40,10 +46,11 @@ inline void pop_front(vector<int> &v) {
     }
 }
 
+
 /*
  * Gets index of node from weightVector
  */
-inline int getIndex(vector<vector<int>> &weightVector, int &node) {
+inline int getIndex(vector<vector<int>> weightVector, int node) {
     vector<int> ordering;
     int index;
     for (auto & i : weightVector) {
@@ -56,40 +63,9 @@ inline int getIndex(vector<vector<int>> &weightVector, int &node) {
     return index;
 }
 
-//inline void overlaps(int &index, int &r_k, int &l_k, int &l, vector<int> &n_k, vector<vector<int>> &weightVector){
-//    for (int k = 0; k < n_k.size(); ++k) {
-//        r_k = l_k + weightVector[n_k[0]][1] - 1;
-//        if (r_k < l) {
-//            pop_front(n_k);
-//        }
-//        if (max(l, l_k) - min(l + weightVector[index][1] - 1, r_k) <= 0) {
-//            l = r_k + 1;
-//            pop_front(n_k);
-//        }
-//    }
-//}
-//
-//
-//inline vector<int> intervalColoring(int &index, vector<vector<int>> &adjacencyMatrix, vector<vector<int>> &weightVector) {
-//    // Initialization
-//    int l = 1, l_k = 1, r_k = 0;
-//    vector<int> n_k = (getNeighbors(index, adjacencyMatrix, weightVector));
-//
-//    // Overlaps
-//    overlaps(index, r_k, l_k, l, n_k, weightVector);
-//
-//    // Termination
-//    vector<int> s_k(weightVector[index][1]);
-//    if(l_k == l or n_k.empty()){
-//        iota (begin(s_k), end(s_k), l);
-//    }else{
-//        l_k = l;
-//        overlaps(index, r_k, l_k, l, n_k, weightVector);
-//        iota (begin(s_k), end(s_k), l);
-//    }
-//    return s_k;
-//}
-
+/*
+ *
+ */
 inline void overlaps(int &index, int &r_j, int &l_j, int &l, vector<int> &n_k, vector<vector<int>> &weightVector, vector<vector<int>> &s_g){
     for (int j = 0; j < n_k.size(); ++j) {
         l_j = s_g[getIndex(weightVector, weightVector[n_k[0]][1])][0];
@@ -105,7 +81,9 @@ inline void overlaps(int &index, int &r_j, int &l_j, int &l, vector<int> &n_k, v
     }
 }
 
-
+/*
+ *
+ */
 inline vector<vector<int>> intervalColoring(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> &weightVector) {
     vector<vector<int>> s_g(0);
 

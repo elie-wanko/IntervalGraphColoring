@@ -49,5 +49,8 @@
 *.iml
 .DS_Store
 *gitattributes
-cmake-build-debug/
-resources/
+Code/cmake-build-debug/
+Code/build/
+Code/playground.cpp
+Code/playground
+Resources/
