@@ -9,9 +9,12 @@
 #include <vector>
 #include <numeric>
 
+
 using namespace std;
 
-
+/*
+ * Orders nodes based on indexes.
+ */
 inline vector<vector<int>> indexGreedy(vector<vector<int>> weightVector) {
     sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[0] < b[0];
@@ -20,6 +23,9 @@ inline vector<vector<int>> indexGreedy(vector<vector<int>> weightVector) {
     return weightVector;
 }
 
+/*
+ * Orders nodes based on assigned (non-increasing) weights.
+ */
 inline vector<vector<int>> weightGreedy(vector<vector<int>> weightVector) {
     sort(weightVector.begin(), weightVector.end(), [](const vector<int> &a, const vector<int> &b) {
         return a[1] > b[1];
@@ -28,8 +34,10 @@ inline vector<vector<int>> weightGreedy(vector<vector<int>> weightVector) {
     return weightVector;
 }
 
-
-inline vector<vector<int>> degreeGreedy(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> &weightVector){
+/*
+ * Orders nodes based on (non-increasing) degrees.
+ */
+inline vector<vector<int>> degreeGreedy(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> weightVector){
     for (int i = 0; i < adjacencyMatrix.size(); ++i) {
         weightVector[i].push_back(accumulate(adjacencyMatrix[i].begin(), adjacencyMatrix[i].end(), 0));
     }
@@ -41,6 +49,9 @@ inline vector<vector<int>> degreeGreedy(vector<vector<int>> &adjacencyMatrix, ve
     return weightVector;
 }
 
+/*
+ * Orders nodes based on (non-increasing) sum of weights of a node and its neighbors in I(P)
+ */
 inline vector<vector<int>> neighborGreedy(vector<vector<int>> &adjacencyMatrix, vector<vector<int>> weightVector) {
     vector<int> weights, tempVector;
 

@@ -12,6 +12,7 @@
 
 using namespace std;
 
+
 /*
  * Prints grid of type <vector<int>>
  */
